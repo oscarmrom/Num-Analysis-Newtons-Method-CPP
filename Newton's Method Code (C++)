@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+double e = 2.71828182845904523536;
+double epsilon = pow(10, -5);
+
+double recursive(double);
+
+void initialize(double x0) {
+	double xn1 = recursive(x0);
+}
+
+double recursive(double xn) {
+	double fx = pow(e, xn) - (3 * pow(xn, 2));
+	double fxPrime = pow(e, xn) - 6 * xn;
+	double newX = xn - (fx / fxPrime);
+	cout << endl << newX << endl;
+
+	double fxNewX = pow(e, newX) - 3 * pow(newX, 2);
+	cout << "f(c) = " << abs(fxNewX) << endl;
+	
+	if (epsilon < abs(fxNewX))
+	{
+		return recursive(newX);
+	}
+	else
+	{
+		cout << endl << newX << " is the answer";
+	}
+}
+
+int main() {
+	double x0 = 1.0;
+	int stop;
+
+	initialize(x0);
+
+	cin >> stop;								//To pause program at the end of run
+
+	return 0;
+}
+
+
+
